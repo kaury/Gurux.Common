@@ -30,11 +30,8 @@
 // Full text may be retrieved at http://www.gnu.org/licenses/gpl-2.0.txt
 //---------------------------------------------------------------------------
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using System.Threading;
 
 namespace Gurux.Common
 {
@@ -322,6 +319,40 @@ namespace Gurux.Common
         object SyncRoot
         {
             get;
+        }
+    }
+
+    /// <summary>
+    /// Common interface for all Media components.<br/>
+    /// Using this interface GXCommunication library enables communication with
+    /// different medias. IGXMedia2 improves functionality for async connections.
+    /// </summary>
+    public interface IGXMedia2 : IGXMedia
+    {
+        /// <summary>
+        /// Wait time for asynchronous messages.
+        /// </summary>
+        UInt32 AsyncWaitTime
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Wait handle for asynchronous messages. It's null if asynchronous messages is not used.
+        /// </summary>
+        EventWaitHandle AsyncWaitHandle
+        {
+            get;
+        }
+
+        /// <summary>
+        /// How long data from the media is waited before received data is handled.
+        /// </summary>
+        UInt32 ReceiveDelay
+        {
+            get;
+            set;
         }
     }
 
